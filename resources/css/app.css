@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    :root {
+        /* Token FigCraft: ink (navy), coral, paper */
+        --ink: 215 48% 11%;
+        --coral: 7 75% 60%;
+        --paper: 40 39% 96%;
+
+        --background: var(--paper);
+        --foreground: var(--ink);
+        --card: 0 0% 100%;
+        --card-foreground: var(--ink);
+        --popover: 0 0% 100%;
+        --popover-foreground: var(--ink);
+        --primary: var(--ink);
+        --primary-foreground: var(--paper);
+        --secondary: 38 25% 90%;
+        --secondary-foreground: var(--ink);
+        --muted: 38 22% 92%;
+        --muted-foreground: 215 15% 38%;
+        --accent: var(--coral);
+        --accent-foreground: var(--ink);
+        --destructive: 0 72% 45%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 38 18% 84%;
+        --input: 38 18% 82%;
+        --ring: var(--ink);
+        --chart-1: 7 75% 60%;
+        --chart-2: 173 58% 39%;
+        --chart-3: 197 37% 24%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+        --radius: 0.5rem;
+        --sidebar-background: 0 0% 100%;
+        --sidebar-foreground: 215 30% 22%;
+        --sidebar-primary: var(--ink);
+        --sidebar-primary-foreground: var(--paper);
+        --sidebar-accent: 38 30% 93%;
+        --sidebar-accent-foreground: var(--ink);
+        --sidebar-border: 38 18% 86%;
+        --sidebar-ring: var(--coral);
+    }
+
+    .dark {
+        --ink: 210 40% 96%;
+        --coral: 7 75% 66%;
+        --paper: 215 40% 8%;
+
+        --background: var(--paper);
+        --foreground: var(--ink);
+        --card: 215 32% 12%;
+        --card-foreground: var(--ink);
+        --popover: 215 32% 12%;
+        --popover-foreground: var(--ink);
+        --primary: var(--ink);
+        --primary-foreground: 215 40% 8%;
+        --secondary: 215 25% 18%;
+        --secondary-foreground: var(--ink);
+        --muted: 215 25% 16%;
+        --muted-foreground: 215 15% 72%;
+        --accent: var(--coral);
+        --accent-foreground: 215 40% 8%;
+        --destructive: 0 62% 50%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 215 20% 22%;
+        --input: 215 20% 22%;
+        --ring: var(--coral);
+        --chart-1: 7 75% 66%;
+        --chart-2: 173 58% 45%;
+        --chart-3: 197 37% 55%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+        --sidebar-background: 215 35% 10%;
+        --sidebar-foreground: 210 30% 92%;
+        --sidebar-primary: var(--coral);
+        --sidebar-primary-foreground: 215 40% 8%;
+        --sidebar-accent: 215 22% 18%;
+        --sidebar-accent-foreground: 210 30% 92%;
+        --sidebar-border: 215 20% 20%;
+        --sidebar-ring: var(--coral);
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}

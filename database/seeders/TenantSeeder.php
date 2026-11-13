@@ -104,7 +104,7 @@ final class TenantSeeder extends Seeder
             ]
         );
 
-        if ($adminEmail === null || $adminPassword === null) {
+        if (blank($adminEmail) || blank($adminPassword)) {
             $this->command?->warn("Admin untuk tenant {$tenant->slug} dilewati: isi MSVA_ADMIN_* / DEMO_ADMIN_* di .env.");
 
             return;

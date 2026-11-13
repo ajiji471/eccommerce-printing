@@ -15,7 +15,7 @@ final class SuperAdminSeeder extends Seeder
         $email = config('seeding.super_admin.email');
         $password = config('seeding.super_admin.password');
 
-        if ($email === null || $password === null) {
+        if (blank($email) || blank($password)) {
             $this->command?->warn('Super-admin dilewati: isi SUPER_ADMIN_EMAIL dan SUPER_ADMIN_PASSWORD di .env.');
 
             return;

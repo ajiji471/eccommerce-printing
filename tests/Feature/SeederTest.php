@@ -4,6 +4,47 @@ use App\Enums\PlanCode;
 use App\Models\Plan;
 use App\Models\Tenant;
 use App\Models\TenantSubscription;
+use App\Models\TenantUser;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+it('melewati super-admin saat kredensial di konfigurasi kosong', function () {
+    config([
+        'seeding.super_admin.email' => '',
+        'seeding.super_admin.password' => '',
+    ]);
+
+    $this->seed();
+
+    expect(User::query()->where('is_super_admin', true)->exists())->toBeFalse();
+});
+
+it('membuat super-admin dari kredensial konfigurasi', function () {
+    config([
+        'seeding.super_admin.email' => 'super@example.test',
+        'seeding.super_admin.password' => 'rahasia-uji',
+    ]);
+
+    $this->seed();
+
+    $admin = User::query()->where('email', 'super@example.test')->firstOrFail();
+
+    expect($admin->is_super_admin)->toBeTrue()
+        ->and(Hash::check('rahasia-uji', $admin->password))->toBeTrue();
+});
+
+it('melewati admin tenant saat kredensial di konfigurasi kosong', function () {
+    config([
+        'seeding.msva.admin_email' => '',
+        'seeding.msva.admin_password' => '',
+        'seeding.demo.admin_email' => '',
+        'seeding.demo.admin_password' => '',
+    ]);
+
+    $this->seed();
+
+    expect(TenantUser::query()->count())->toBe(0);
+});
 
 it('menjalankan seeder dua kali tanpa membuat duplikasi', function () {
     $this->seed();

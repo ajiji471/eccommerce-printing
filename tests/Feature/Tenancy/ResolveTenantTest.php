@@ -27,6 +27,18 @@ it('mencocokkan custom domain sebelum subdomain', function () {
         ->assertInertia(fn (Assert $page) => $page->where('tenant.slug', 'msva'));
 });
 
+it('melayani landing platform pada host lokal', function () {
+    Tenant::factory()->create(['slug' => 'msva']);
+
+    $this->get('http://localhost/')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->component('Platform/Landing'));
+
+    $this->get('http://127.0.0.1/')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->component('Platform/Landing'));
+});
+
 it('mengembalikan 404 untuk host yang tidak dikenal', function () {
     Tenant::factory()->create(['slug' => 'msva']);
 

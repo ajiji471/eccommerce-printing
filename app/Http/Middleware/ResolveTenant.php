@@ -24,7 +24,7 @@ final class ResolveTenant
 
         $tenant = null;
 
-        if ($host !== $platformDomain) {
+        if (! $this->isPlatformHost($host, $platformDomain)) {
             $tenant = Tenant::query()->where('domain', $host)->first()
                 ?? $this->findBySubdomain($host, $platformDomain);
 
@@ -60,8 +60,32 @@ final class ResolveTenant
         return Tenant::query()->where('slug', $subdomain)->first();
     }
 
+    private function isPlatformHost(string $host, string $platformDomain): bool
+    {
+        if ($host === $platformDomain) {
+            return true;
+        }
+
+        /** @var array<int, string> $aliases */
+        $aliases = config('app.platform_aliases', []);
+
+        foreach ($aliases as $alias) {
+            if ($this->normalizeHost($alias) === $host) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private function normalizeHost(string $host): string
     {
-        return Str::lower(Str::before($host, ':'));
+        $host = Str::lower(trim($host));
+
+        if (Str::startsWith($host, '[')) {
+            return Str::before(Str::after($host, '['), ']');
+        }
+
+        return substr_count($host, ':') === 1 ? Str::before($host, ':') : $host;
     }
 }

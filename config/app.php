@@ -56,6 +56,11 @@ return [
 
     'platform_domain' => env('PLATFORM_DOMAIN', 'platform.test'),
 
+    'platform_aliases' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('PLATFORM_ALIASES', 'localhost,127.0.0.1,::1'))
+    ))),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

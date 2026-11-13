@@ -10,6 +10,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->withoutVite();
+
         $this->withServerVariables([
             'HTTP_HOST' => (string) config('app.platform_domain'),
         ]);
